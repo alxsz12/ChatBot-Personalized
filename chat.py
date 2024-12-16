@@ -1,4 +1,4 @@
-!pip install langchain
+pip install langchain
 import streamlit as st
 import langchain
 import langchain_openai
