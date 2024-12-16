@@ -1,7 +1,7 @@
 import streamlit as st
 import langchain_community
 import langchain_openai
-from langchain_openai import OpenAI
+from langchain_openai import ChatOpenAI, OpenAI
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain.memory import ConversationBufferMemory
@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
 from langchain_openai import OpenAIEmbeddings
 
-st.title("The Badger Heralad Chatbot")
+st.title("The Badger Herald GPT")
 
 # Define your API key
 openai_api_key = st.secrets["OPENAI_API_KEY"]
@@ -29,8 +29,8 @@ if "vectorstore" not in st.session_state:
             text = file.read()
             text_splitter = CharacterTextSplitter(
                 separator="\n",
-                chunk_size=1000,
-                chunk_overlap=200,
+                chunk_size=500,
+                chunk_overlap=100,
                 length_function=len
             )
             chunks = text_splitter.split_text(text)
@@ -48,9 +48,19 @@ def generate_response(query):
             return_messages=True
         )
         
+        llm = ChatOpenAI(
+            model_name="gpt-3.5-turbo-16k",
+            temperature=0.7,
+            openai_api_key=openai_api_key
+        )
+        
+        retriever = st.session_state.vectorstore.as_retriever(
+            search_kwargs={"k": 3}
+        )
+        
         st.session_state.conversation_chain = ConversationalRetrievalChain.from_llm(
-            llm=OpenAI(temperature=0.7, openai_api_key=openai_api_key),
-            retriever=st.session_state.vectorstore.as_retriever(),
+            llm=llm,
+            retriever=retriever,
             memory=memory
         )
     
