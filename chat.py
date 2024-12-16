@@ -1,4 +1,6 @@
 import streamlit as st
+import langchain_community
+import langchain_openai
 from langchain_openai import OpenAI
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
