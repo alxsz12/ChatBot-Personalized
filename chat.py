@@ -15,7 +15,7 @@ st.title("Personalized LLM-App")
 openai_api_key = "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"
 
 # Remove the file uploader and directly process your text file
-DEFAULT_TEXT_PATH = "default_data.txt"
+DEFAULT_TEXT_PATH = "default.txt"
 
 # Initialize session state
 if "conversation_chain" not in st.session_state:
