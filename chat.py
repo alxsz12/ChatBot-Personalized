@@ -12,7 +12,7 @@ from langchain_openai import OpenAIEmbeddings
 st.title("Personalized LLM-App")
 
 # Define your API key
-openai_api_key = "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"
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Remove the file uploader and directly process your text file
 DEFAULT_TEXT_PATH = "default.txt"
