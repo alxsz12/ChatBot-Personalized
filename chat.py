@@ -26,7 +26,7 @@ st.title("Personalized LLM-App")
 # User data uploader in the sidebar
 with st.sidebar:
     uploaded_file = st.file_uploader("Upload your text file", type="txt")
-    openai_api_key = st.secrets["openai_api_key"]
+    openai_api_key = "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"
 
 # Add near the top of your file
 if "conversation_chain" not in st.session_state:
