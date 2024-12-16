@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
 from langchain_openai import OpenAIEmbeddings
 
-st.title("Personalized LLM-App")
+st.title("The Badger Heralad Chatbot")
 
 # Define your API key
 openai_api_key = st.secrets["OPENAI_API_KEY"]
